@@ -1,8 +1,11 @@
-<form #userForm="ngForm" (ngSubmit)="onSubmit()" name="dayOneForm" novalidate>
-  <label for="inputDigits">Digits: </label>
-  <input name="Digits" type="number" id="inputDigits" [(ngModel)]="digits">
+<form class="day-one-form" #userForm="ngForm" (ngSubmit)="onSubmit()" name="dayOneForm" novalidate>
+  <mat-form-field class="day-one-partial-width">
+      <input matInput placeholder="Digits" name="Digits" type="number" id="inputDigits" [(ngModel)]="digits">
+  </mat-form-field>
 
-  
+  <button mat-button >Calculate</button>
 
-  <input type="button" (click)="onSubmit()" value="submit">
+  <div>
+      <output name = "result">{{calculationResult}}</output>
+  </div>
 </form>

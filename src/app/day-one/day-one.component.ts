@@ -8,6 +8,7 @@ import { ReverseCaptchaService } from '../services/reverse-captcha/reverse-captc
 })
 export class DayOneComponent implements OnInit {
   public digits: number;
+  public calculationResult: number;
 
   constructor( private _reverseCaptchaService: ReverseCaptchaService ) { }
 
@@ -15,11 +16,9 @@ export class DayOneComponent implements OnInit {
   }
 
   onSubmit() {
-    if( this.digits == null ) {
-      console.log("No digits entered");
-    }
-    else {
-      console.log( this._reverseCaptchaService.calculate(this.digits) );
+    if( this.digits != null ) {
+      // Direct update, future examples will show update via subscription
+      this.calculationResult = this._reverseCaptchaService.calculate(this.digits);
     }
   }
 }
