@@ -1,0 +1,8 @@
+<form #userForm="ngForm" (ngSubmit)="onSubmit()" name="dayOneForm" novalidate>
+  <label for="inputDigits">Digits: </label>
+  <input name="Digits" type="number" id="inputDigits" [(ngModel)]="digits">
+
+  
+
+  <input type="button" (click)="onSubmit()" value="submit">
+</form>
