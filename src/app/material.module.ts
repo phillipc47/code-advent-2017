@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import {
     MatButtonModule,
     MatInputModule, 
-    MatTabsModule,
+    MatTabsModule
   } from '@angular/material';
 
 @NgModule({

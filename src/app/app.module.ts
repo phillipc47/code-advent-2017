@@ -9,11 +9,15 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DayOneComponent } from './day-one/day-one.component';
+import { DayTwoComponent } from './day-two/day-two.component';
+import { NumbersSpacesDirective } from './directives/numbers-spaces.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DayOneComponent
+    DayOneComponent,
+    DayTwoComponent,
+    NumbersSpacesDirective
   ],
   imports: [
     BrowserModule,
