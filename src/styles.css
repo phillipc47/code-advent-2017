@@ -2,3 +2,22 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Roboto', sans-serif; }
+
+html {
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+body {
+    background: #F2F3EB;
+}
+
+form {
+    padding: 35px;
+    margin: 50px 0;
+}
+
+  .result {
+    padding-top: 5%;
+    text-align: center;
+    font-weight: bold;
+  }
