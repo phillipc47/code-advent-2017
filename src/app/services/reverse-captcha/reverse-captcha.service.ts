@@ -14,28 +14,29 @@ export class ReverseCaptchaService {
       // this._http.post<any>(this._url, digits)
     }
     else {
-      return this.calculateDisconnecte(digits);
+      return this.calculateDisconnected(digits);
     }
   }
   
-  private calculateDisconnecte(digits: number) {
-
+  private calculateDisconnected(digits: number) {
+    // Obviously would not do this for production code -- would embed business logic and such in a service.  However, to lower app dependencies on external services and 
+    // for the sake of this example, compute locally.  
     if( digits ) {
-      var digitsString = digits.toString();
+      let digitsString = digits.toString();
 
       if( digitsString ) {
-        var digitsArray = digitsString.split('').map(Number);
+        let digitsArray = digitsString.split('').map(Number);
 
         if( digitsArray.length == 1 ) {
           return 0;
         } 
         else {
-          var currentPosition: number;
-          var nextPosition: number;
-          var sum: number;
+          let currentPosition: number;
+          let nextPosition: number;
+          let sum: number;
 
           sum = 0;
-          for(var currentPosition = 0, nextPosition = 1; currentPosition < digitsArray.length; currentPosition += 1, nextPosition += 1) {
+          for(currentPosition = 0, nextPosition = 1; currentPosition < digitsArray.length; currentPosition += 1, nextPosition += 1) {
             if( nextPosition >= digitsArray.length ) {
               // Circular list, loop around to first number
               nextPosition = 0;
