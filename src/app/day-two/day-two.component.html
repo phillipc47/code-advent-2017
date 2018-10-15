@@ -1,23 +1,20 @@
 <form class="day-two-form" #userForm="ngForm" (ngSubmit)="onSubmit()" name="dayTwoForm" novalidate>
 
-  <div layout="row" flex>
-      <mat-form-field flex class="md-icon-float md-block md-title">
-              <label>Spreadsheet Row One</label>
-              <input appNumbersSpaces matInput name="Row One" [(ngModel)]="rowOne" type="text">
+  <div layout="row">
+      <mat-form-field  class="md-icon-float md-block md-title">
+              <input appNumbersSpaces matInput placeholder="Spreadsheet Row One" name="Row One" [(ngModel)]="rowOne" type="text">
       </mat-form-field>
   </div>  
 
-  <div layout="row" flex>
-      <mat-form-field flex class="md-icon-float md-block md-title">
-              <label>Spreadsheet Row Two</label>
-              <input matInput name="Row One" [(ngModel)]="rowTwo" type="text">
+  <div layout="row">
+      <mat-form-field  class="md-icon-float md-block md-title">
+              <input matInput placeholder="Spreadsheet Row Two" name="Row One" [(ngModel)]="rowTwo" type="text">
       </mat-form-field>
   </div>  
 
-  <div layout="row" flex>
-      <mat-form-field flex class="md-icon-float md-block md-title">
-              <label>Spreadsheet Row Three</label>
-              <input matInput name="Row One" [(ngModel)]="rowThree" type="text">
+  <div layout="row">
+      <mat-form-field  class="md-icon-float md-block md-title">
+              <input matInput placeholder="Spreadsheet Row Three" name="Row One" [(ngModel)]="rowThree" type="text">
       </mat-form-field>
   </div>
 
