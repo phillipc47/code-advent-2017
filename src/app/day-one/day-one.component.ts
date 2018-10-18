@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReverseCaptchaService } from '../services/reverse-captcha/reverse-captcha.service';
 import { ResultDataService } from '../services/result-service/result-data.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-day-one',
@@ -10,7 +9,6 @@ import { Observable } from 'rxjs';
 })
 export class DayOneComponent implements OnInit {
   public digits: number;
-  public calculationResult: number;
 
   constructor( private _reverseCaptchaService: ReverseCaptchaService, private _resultDataService: ResultDataService ) {
    }
@@ -20,9 +18,7 @@ export class DayOneComponent implements OnInit {
 
   onSubmit() {
     if( this.digits != null ) {
-      // Direct update, future examples will show update via subscription
-      this.calculationResult = this._reverseCaptchaService.calculate(this.digits);
-      this._resultDataService.updateResult(this.calculationResult);
+      this._resultDataService.updateResult(this._reverseCaptchaService.calculate(this.digits));
     }
   }
 }

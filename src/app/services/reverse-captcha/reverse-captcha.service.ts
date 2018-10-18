@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReverseCaptchaService {
-  private _url = '';
+  private _url = 'http://localhost:45603/api/reverseCaptcha';
   constructor(private _http: HttpClient) { }
 
   calculate(digits: number) {
     if( this._url != '' ) {
-      alert('Not Implemented');
-      // this._http.post<any>(this._url, digits)
+      // let parameters = new HttpParams();
+      let parameters = { input: digits.toString() };
+      return this._http.get<any>(this._url, { params: parameters }).subscribe(data => {let res = JSON.parse(JSON.stringify(data)); console.log(res)});
     }
     else {
       return this.calculateDisconnected(digits);

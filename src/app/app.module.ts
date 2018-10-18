@@ -4,13 +4,15 @@ import { NgModule } from '@angular/core';
 import {MaterialModule } from './material.module';
 
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DayOneComponent } from './day-one/day-one.component';
 import { DayTwoComponent } from './day-two/day-two.component';
 import { NumbersSpacesDirective } from './directives/numbers-spaces.directive';
+
+import { HttpService } from './services/http-service/http-service.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,7 @@ import { NumbersSpacesDirective } from './directives/numbers-spaces.directive';
     HttpClientModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [ {provide: HTTP_INTERCEPTORS, useClass: HttpService, multi: true} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
