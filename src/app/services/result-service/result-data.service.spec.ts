@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ResultDataService } from './result-service.service';
+import { ResultDataService } from './result-data.service';
 
 describe('ResultDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

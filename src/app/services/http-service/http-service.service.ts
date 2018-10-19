@@ -10,14 +10,13 @@ import { tap } from "rxjs/operators";
 })
 export class HttpService implements HttpInterceptor {
   intercept(
-    req: HttpRequest<any>,
+    request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
 
-    return next.handle(req).pipe(tap(event => {
+    return next.handle(request).pipe(tap(event => {
       if (event instanceof HttpResponse) {
-        console.log('---> status:', event.status);
-        console.log('---> filter:', req.params.get('filter'));
+        console.log('>>>status:', event.status);
       }
     }));
 

@@ -1,24 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Subscription, Observable } from 'rxjs';
+import { SimpleResult} from '../../models/simple-result.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReverseCaptchaService {
+  //TODO: Get this from a config
   private _url = 'http://localhost:45603/api/reverseCaptcha';
+  private _result: SimpleResult;
+  private _whatever: SimpleResult;
+
   constructor(private _http: HttpClient) { }
 
   calculate(digits: number) {
     if( this._url != '' ) {
-      // let parameters = new HttpParams();
-      let parameters = { input: digits.toString() };
-      return this._http.get<any>(this._url, { params: parameters }).subscribe(data => {let res = JSON.parse(JSON.stringify(data)); console.log(res)});
+      let parameters: HttpParams = new HttpParams().set('input', digits.toString());
+      this.doTheThing(parameters).subscribe((data: SimpleResult)  => console.log(data.input, data.result));
+      return 5;
     }
     else {
       return this.calculateDisconnected(digits);
     }
   }
   
+  doTheThing(parameters: HttpParams): Observable<SimpleResult> {
+    return this._http.get<SimpleResult>(this._url, { params: parameters } );
+  }
+
   private calculateDisconnected(digits: number) {
     // Obviously would not do this for production code -- would embed business logic and such in a service.  However, to lower app dependencies on external services and 
     // for the sake of this example, compute locally.  

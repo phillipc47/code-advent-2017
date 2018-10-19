@@ -19,7 +19,7 @@ import { HttpService } from './services/http-service/http-service.service';
     AppComponent,
     DayOneComponent,
     DayTwoComponent,
-    NumbersSpacesDirective
+    NumbersSpacesDirective 
   ],
   imports: [
     BrowserModule,
