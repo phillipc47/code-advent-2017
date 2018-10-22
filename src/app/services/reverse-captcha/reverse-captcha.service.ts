@@ -14,21 +14,12 @@ export class ReverseCaptchaService {
 
   constructor(private _http: HttpClient) { }
 
-  calculate(digits: number) {
-    if( this._url != '' ) {
+  calculate(digits: number): Observable<SimpleResult> {
       let parameters: HttpParams = new HttpParams().set('input', digits.toString());
-      this.doTheThing(parameters).subscribe((data: SimpleResult)  => console.log(data.input, data.result));
-      return 5;
-    }
-    else {
-      return this.calculateDisconnected(digits);
-    }
-  }
-  
-  doTheThing(parameters: HttpParams): Observable<SimpleResult> {
-    return this._http.get<SimpleResult>(this._url, { params: parameters } );
+      return this._http.get<SimpleResult>(this._url, { params: parameters } );
   }
 
+  //TODO: Can do in memory service to 'fake' the connection
   private calculateDisconnected(digits: number) {
     // Obviously would not do this for production code -- would embed business logic and such in a service.  However, to lower app dependencies on external services and 
     // for the sake of this example, compute locally.  
