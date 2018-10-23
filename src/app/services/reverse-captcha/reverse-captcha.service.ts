@@ -1,22 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Subscription, Observable } from 'rxjs';
-import { SimpleResult} from '../../models/simple-result.model';
+import { Observable } from 'rxjs';
+import { SimpleResult } from '../../models/simple-result.model';
+import { AppConfigService } from '../app-config/app-config.service';
+import { ConfigurationData } from 'src/app/models/configuration-data.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReverseCaptchaService {
-  //TODO: Get this from a config
-  private _url = 'http://localhost:45603/api/reverseCaptcha';
-  private _result: SimpleResult;
-  private _whatever: SimpleResult;
+  private _serviceKey: string = "reverse-captcha";
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private _appConfigService: AppConfigService) { }
 
-  calculate(digits: number): Observable<SimpleResult> {
-      let parameters: HttpParams = new HttpParams().set('input', digits.toString());
-      return this._http.get<SimpleResult>(this._url, { params: parameters } );
+  public calculate(digits: number): Observable<SimpleResult> {
+
+    if( this._appConfigService ) {
+      //TODO: We can wrap this in a helper
+      let configData: ConfigurationData = this._appConfigService.GetConfigurationData();
+      if( configData ) {
+        let endpoint = configData.serviceEndpoints[this._serviceKey];
+        if( endpoint ) {
+          let parameters: HttpParams = new HttpParams().set('input', digits.toString());
+          return this._http.get<SimpleResult>(endpoint.url, { params: parameters } );
+        } else {
+          //TODO: Only temporary
+          console.log("Nope, no endpoint");
+        }
+      }
+    }
   }
 
   //TODO: Can do in memory service to 'fake' the connection
