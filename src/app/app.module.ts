@@ -13,7 +13,7 @@ import { DayTwoComponent } from './day-two/day-two.component';
 import { NumbersSpacesDirective } from './directives/numbers-spaces.directive';
 import { AppConfigService } from './services/app-config/app-config.service';
 
-import { HttpService } from './services/http-service/http-service.service';
+import { HttpInterceptorService } from './services/http-interceptor/http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { HttpService } from './services/http-service/http-service.service';
   ],
   providers: [ 
     AppConfigService, { provide: APP_INITIALIZER, useFactory: (configService: AppConfigService) => () => configService.loadConfigurationData(), deps: [AppConfigService], multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpService, multi: true} ],
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
