@@ -8,7 +8,7 @@ import { tap } from "rxjs/operators";
 @Injectable({
   providedIn: 'root'
 })
-export class HttpService implements HttpInterceptor {
+export class HttpInterceptorService implements HttpInterceptor {
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
