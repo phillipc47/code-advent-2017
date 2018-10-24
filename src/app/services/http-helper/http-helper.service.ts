@@ -33,8 +33,6 @@ export class HttpHelperService {
       parameterOutput += `key: ${key} Value: ${parameters[key]}\n`;
     });
 
-
-    //TODO: map parameters to input
     let emptyResult: Observable<SimpleResult> = Observable.create( observer => { observer.next( { input: parameterOutput, result: 0 } ) } );
     return emptyResult;
   }
@@ -49,15 +47,14 @@ export class HttpHelperService {
                            .pipe( catchError(this.handleError) );
         } else {
           console.error(`No endpoint found which corresponds to ${serviceKey}`);
-          return this.createEmptyResult(parameters);
         }
       } else {
         console.error("Unable to load configuration data");
-        return this.createEmptyResult(parameters);
       }
     } else {
       console.error("Configuration Service does not exist");
-      return this.createEmptyResult(parameters);
     }
+
+    return this.createEmptyResult(parameters);
   }
 }
