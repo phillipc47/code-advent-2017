@@ -9,7 +9,7 @@ import { ResultDataService } from './services/result-service/result-data.service
 
 export class AppComponent {
   title = 'code-advent';
-  public result: number;
+  public result: string;
   
   constructor(resultDataService: ResultDataService)   {
     resultDataService.result$.subscribe(result => {

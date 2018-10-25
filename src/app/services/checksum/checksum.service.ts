@@ -9,16 +9,17 @@ export class ChecksumService {
 
   constructor(private _http: HttpClient) { }
 
-  calculate(spreadsheetArray: string[]) {
+  calculate(spreadsheetArray: string[]): string {
     if( this._url != '' ) {
       alert('Not Implemented');
     }
     else {
+      return spreadsheetArray.toString();
       return this.calculateDisconnected(spreadsheetArray);
     }
   }
   
-  private calculateDisconnected(spreadsheetArray: string[]) {
+  private calculateDisconnected(spreadsheetArray: string[]): string {
     // Obviously would not do this for production code -- would embed business logic and such in a service.  However, to lower app dependencies on external services and 
     // for the sake of this example, compute locally.  
     if( spreadsheetArray && spreadsheetArray.length > 0 ) {
@@ -41,7 +42,7 @@ export class ChecksumService {
     }
 
     //TODO: Handle exception cases
-    return 0;
+    return '';
   }
 
   private findLowestHighest(data: string) {
@@ -66,7 +67,7 @@ export class ChecksumService {
     return {low: lowest, high: highest};
   }
 
-  private computeCheckSum(differences: number[]) {
+  private computeCheckSum(differences: number[]): string {
     let checksum: number = 0;
     
     if( differences ) {
@@ -75,6 +76,6 @@ export class ChecksumService {
       });
     }
 
-    return checksum;
+    return checksum.toString();
   }
 }

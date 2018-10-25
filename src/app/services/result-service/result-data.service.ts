@@ -6,12 +6,12 @@ import { Injectable } from '@angular/core';
 })
 
 export class ResultDataService {
-  private _resultSource = new BehaviorSubject<number>(0);
+  private _resultSource = new BehaviorSubject<string>('');
   public result$ = this._resultSource.asObservable();
 
   constructor() { }
 
-  public updateResult(newResult: number) {
+  public updateResult(newResult: string) {
     this._resultSource.next(newResult);
   }
 }
