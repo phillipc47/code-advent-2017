@@ -1,81 +1,36 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { SimpleResult } from '../../models/simple-result.model';
+
+import { HttpHelperService } from '../http-helper/http-helper.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChecksumService {
-  private _url = '';
+  constructor(private _httpHelper: HttpHelperService) { }
 
-  constructor(private _http: HttpClient) { }
-
-  calculate(spreadsheetArray: string[]): string {
-    if( this._url != '' ) {
-      alert('Not Implemented');
-    }
-    else {
-      return spreadsheetArray.toString();
-      return this.calculateDisconnected(spreadsheetArray);
-    }
+  calculate(spreadsheetArray: string[]): Observable<SimpleResult> {
+    let parameters: HttpParams = new HttpParams().set('input', this.buildServiceInput(spreadsheetArray));
+    return this._httpHelper.invokeGetService("checksum", parameters);
   }
-  
-  private calculateDisconnected(spreadsheetArray: string[]): string {
-    // Obviously would not do this for production code -- would embed business logic and such in a service.  However, to lower app dependencies on external services and 
-    // for the sake of this example, compute locally.  
+
+  private buildServiceInput(spreadsheetArray: string[]): string {
+    let input: string = '';
+
     if( spreadsheetArray && spreadsheetArray.length > 0 ) {
-      let differences: number[] = new Array(spreadsheetArray.length);
-      
-      spreadsheetArray.forEach(row => {
+      spreadsheetArray.forEach( row => {
         if( row ) {
-          let lowHigh = this.findLowestHighest(row);
-          let low: number = lowHigh.low;
-          let high: number = lowHigh.high;
-
-          let difference = high - low;
-          if( difference != 0 ) {
-            differences.push(difference);
+          if( input.length > 0 ) {
+            input += ', ';
           }
+          input += row;
         }
-      });
-
-      return this.computeCheckSum(differences);
-    }
-
-    //TODO: Handle exception cases
-    return '';
-  }
-
-  private findLowestHighest(data: string) {
-    let highest: number = Number.MIN_SAFE_INTEGER;
-    let lowest: number = Number.MAX_SAFE_INTEGER;
-    let numbers = data.split(' ');
-
-    numbers.forEach(numberCandidate => {
-      if( numberCandidate.trim() !== '' ) {
-        let number = Number(numberCandidate);
-
-        if( number > highest ) {
-          highest = number;
-        }
-
-        if( number < lowest ) {
-          lowest = number;
-        }
-      }
-    });
-
-    return {low: lowest, high: highest};
-  }
-
-  private computeCheckSum(differences: number[]): string {
-    let checksum: number = 0;
-    
-    if( differences ) {
-      differences.forEach(difference => {
-        checksum += difference;
       });
     }
 
-    return checksum.toString();
+    return input;
   }
 }

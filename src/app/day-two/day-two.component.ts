@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChecksumService } from '../services/checksum/checksum.service';
 import { ResultDataService } from '../services/result-service/result-data.service';
+import { SimpleResult} from '../models/simple-result.model';
 
 @Component({
   selector: 'app-day-two',
@@ -20,6 +21,7 @@ export class DayTwoComponent implements OnInit {
 
   onSubmit() {
     let spreadsheetRows = [this.rowOne, this.rowTwo, this.rowThree];
-    this._resultDataService.updateResult( this._checkSumService.calculate(spreadsheetRows) );
+
+    this._checkSumService.calculate(spreadsheetRows).subscribe((data: SimpleResult)  =>  this._resultDataService.updateResult(data.result.toString()));
   }
 }
