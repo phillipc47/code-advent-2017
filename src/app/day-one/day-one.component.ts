@@ -19,8 +19,7 @@ export class DayOneComponent implements OnInit {
 
   onSubmit() {
     if( this.digits != null ) {
-
-      this._reverseCaptchaService.calculate(this.digits).subscribe((data: SimpleResult)  =>  this._resultDataService.updateResult(data.result));
+      this._reverseCaptchaService.calculate(this.digits).subscribe((data: SimpleResult)  =>  this._resultDataService.updateResult(data.result.toString()));
     }
   }
 }
