@@ -4,9 +4,8 @@ import { SimpleResult } from '../../models/simple-result.model';
 import { AppConfigService } from '../app-config/app-config.service';
 import { ConfigurationData } from 'src/app/models/configuration-data.model';
 
-import { Observable } from 'rxjs';
+import { Observable ,  throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
