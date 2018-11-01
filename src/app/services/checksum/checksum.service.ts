@@ -14,7 +14,7 @@ export class ChecksumService {
 
   calculate(spreadsheetArray: string[]): Observable<SimpleResult> {
     let parameters: HttpParams = new HttpParams().set('input', this.buildServiceInput(spreadsheetArray));
-    return this._httpHelper.invokeGetService("checksum", parameters);
+    return this._httpHelper.invokeGetService("check-sum", parameters);
   }
 
   private buildServiceInput(spreadsheetArray: string[]): string {
