@@ -10,17 +10,19 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DayOneComponent } from './day-one/day-one.component';
 import { DayTwoComponent } from './day-two/day-two.component';
-import { NumbersSpacesDirective } from './directives/numbers-spaces.directive';
 import { AppConfigService } from './services/app-config/app-config.service';
 
 import { HttpInterceptorService } from './services/http-interceptor/http-interceptor.service';
+import { DayFourComponent } from './day-four/day-four.component';
+import { NumbersSpacesDirective } from './directives/number-spaces/numbers-spaces.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     DayOneComponent,
     DayTwoComponent,
-    NumbersSpacesDirective 
+    DayFourComponent,
+    NumbersSpacesDirective,
   ],
   imports: [
     BrowserModule,
