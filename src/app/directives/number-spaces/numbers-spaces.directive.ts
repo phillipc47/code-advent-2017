@@ -1,7 +1,7 @@
 import { Directive, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appNumbersSpaces]'
+  selector: '[app-number-spaces]'
 })
 export class NumbersSpacesDirective {
 
@@ -11,7 +11,7 @@ export class NumbersSpacesDirective {
 
   private shouldApply( event: KeyboardEvent ): boolean {
     // This just feels so wrong -- revist when time permits
-    const attribute: Attr = event.srcElement.attributes.getNamedItem('appNumbersSpaces');
+    const attribute: Attr = event.srcElement.attributes.getNamedItem('app-number-spaces');
   
     return !!attribute;
   }
@@ -36,14 +36,12 @@ export class NumbersSpacesDirective {
     return true;
   }
 
-  @HostListener('window:keypress', ['$event'])
-  keyEvent(event: KeyboardEvent) {
+  private handleEvent(candidate: string, event): boolean {
     if( !this.shouldApply(event) ) { 
       return true;
     };
 
-    const inputChar = event.key;
-    if( this.isAllowed(inputChar) ) {
+    if( this.isAllowed(candidate) ) {
       return true;
     }
     else {
@@ -52,20 +50,15 @@ export class NumbersSpacesDirective {
     }
   }
 
+  @HostListener('window:keypress', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    const inputChar = event.key;
+    return this.handleEvent(inputChar, event);
+  }
+
   @HostListener('paste', ['$event']) 
   pasteEvent(event) {
-    if( !this.shouldApply(event) ) { 
-      return true;
-    };
-
     const data = event.clipboardData.getData('Text');
-
-    if( this.isAllowed(data) ) {
-      return true;
-    }
-    else {
-      event.preventDefault;
-      return false;
-    }
+    return this.handleEvent(data, event);
   }
 }
