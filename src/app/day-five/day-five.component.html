@@ -1,0 +1,14 @@
+<form class="day-five-form" #userForm="ngForm" (ngSubmit)="onSubmit()" name="dayFiveForm" novalidate>
+
+  <div layout="row">
+      <mat-form-field  class="md-icon-float md-block md-title">
+              <input app-number-spaces matInput placeholder="Jump Offsets" name="Jump Offsets" [(ngModel)]="jumpOffsets" type="text">
+      </mat-form-field>
+  </div>  
+
+  <div class="form-button">
+      <button mat-button >Calculate</button>
+  </div>
+
+  <app-problem-description [problemNumber]=5></app-problem-description>
+</form>
