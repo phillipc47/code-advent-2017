@@ -8,6 +8,7 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProblemDescriptionComponent } from './problem-description/problem-description.component';
 import { DayOneComponent } from './day-one/day-one.component';
 import { DayTwoComponent } from './day-two/day-two.component';
 import { AppConfigService } from './services/app-config/app-config.service';
@@ -23,6 +24,7 @@ import { NumbersSpacesDirective } from './directives/number-spaces/numbers-space
     DayTwoComponent,
     DayFourComponent,
     NumbersSpacesDirective,
+    ProblemDescriptionComponent,
   ],
   imports: [
     BrowserModule,

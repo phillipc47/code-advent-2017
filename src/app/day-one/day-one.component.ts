@@ -3,6 +3,7 @@ import { ReverseCaptchaService } from '../services/reverse-captcha/reverse-captc
 import { ResultDataService } from '../services/result-service/result-data.service';
 import { SimpleResult} from '../models/simple-result.model';
 
+
 @Component({
   selector: 'app-day-one',
   templateUrl: './day-one.component.html',

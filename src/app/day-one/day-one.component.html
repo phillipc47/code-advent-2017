@@ -1,12 +1,14 @@
 <form class="day-one-form" #userForm="ngForm" (ngSubmit)="onSubmit()" name="dayOneForm" novalidate>
 
     <div>
-    <mat-form-field class="day-one-partial-width">
-        <input matInput placeholder="Digits" name="Digits" type="number" id="inputDigits" [(ngModel)]="digits">
-    </mat-form-field>
+        <mat-form-field class="day-one-partial-width">
+            <input matInput placeholder="Digits" name="Digits" type="number" id="inputDigits" [(ngModel)]="digits">
+        </mat-form-field>
     </div>
 
     <div class="form-button">
         <button mat-button >Calculate</button>
     </div>
+
+    <app-problem-description [problemNumber]=1></app-problem-description>
 </form>
