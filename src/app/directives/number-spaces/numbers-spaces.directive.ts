@@ -16,19 +16,24 @@ export class NumbersSpacesDirective {
     return !!attribute;
   }
 
-  private isCharacterAllowed(candidate: string): boolean {
+  private isCharacterAllowed(event: KeyboardEvent, candidate: string): boolean {
     //TODO: Figure out the regex expression, test for space or numeric in the interim
-    if( candidate == ' ' || this._regex.test(candidate)) {
+    if( candidate === ' ' || this._regex.test(candidate)) {
+      return true;
+    }
+
+    let lastCharacter: string = this.lookupLastCharacter(event.srcElement);
+    if( lastCharacter !== '-' && candidate === '-' ) {
       return true;
     }
 
     return false;
   }
 
-  private isAllowed(candidate: string): boolean {
+  private isAllowed(event: KeyboardEvent, candidate: string): boolean {
     for(let i: number = 0; i < candidate.length; i++ ) {
       const currentCharacter = candidate.charAt( i );
-      if( !this.isCharacterAllowed(currentCharacter) )  {
+      if( !this.isCharacterAllowed(event, currentCharacter) )  {
         return false;
       }
     }
@@ -41,13 +46,29 @@ export class NumbersSpacesDirective {
       return true;
     };
 
-    if( this.isAllowed(candidate) ) {
+    if( this.isAllowed(event, candidate) ) {
       return true;
     }
     else {
       event.preventDefault();
       return false;
     }
+  }
+
+  private lastCharacter(value: string): string {
+    if( !value ) {
+      return "";
+    }
+
+    if( value.length == 0 ) {
+      return "";
+    }
+
+    return value[ value.length - 1 ];
+  }
+
+  private lookupLastCharacter(element: Element): string {
+    return this.lastCharacter( element.getAttribute("ng-reflect-model") )
   }
 
   @HostListener('window:keypress', ['$event'])
@@ -58,7 +79,7 @@ export class NumbersSpacesDirective {
 
   @HostListener('paste', ['$event']) 
   pasteEvent(event) {
-    const data = event.clipboardData.getData('Text');
-    return this.handleEvent(data, event);
+    event.preventDefault();
+    return false;
   }
 }

@@ -16,6 +16,7 @@ import { AppConfigService } from './services/app-config/app-config.service';
 import { HttpInterceptorService } from './services/http-interceptor/http-interceptor.service';
 import { DayFourComponent } from './day-four/day-four.component';
 import { NumbersSpacesDirective } from './directives/number-spaces/numbers-spaces.directive';
+import { DayFiveComponent } from './day-five/day-five.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NumbersSpacesDirective } from './directives/number-spaces/numbers-space
     DayFourComponent,
     NumbersSpacesDirective,
     ProblemDescriptionComponent,
+    DayFiveComponent,
   ],
   imports: [
     BrowserModule,
