@@ -16,24 +16,25 @@ export class NumbersSpacesDirective {
     return !!attribute;
   }
 
-  private isCharacterAllowed(event: KeyboardEvent, candidate: string): boolean {
+  private isCharacterAllowed(previousCharacter: string, candidate: string): boolean {
     //TODO: Figure out the regex expression, test for space or numeric in the interim
     if( candidate === ' ' || this._regex.test(candidate)) {
       return true;
     }
 
-    let lastCharacter: string = this.lookupLastCharacter(event.srcElement);
-    if( lastCharacter !== '-' && candidate === '-' ) {
+    if( previousCharacter !== '-' && candidate === '-' ) {
       return true;
     }
 
     return false;
   }
 
-  private isAllowed(event: KeyboardEvent, candidate: string): boolean {
+  private isAllowed(previousCharacter: string, candidate: string): boolean {
     for(let i: number = 0; i < candidate.length; i++ ) {
       const currentCharacter = candidate.charAt( i );
-      if( !this.isCharacterAllowed(event, currentCharacter) )  {
+      const computedPreviousCharacter: string = i === 0 ? previousCharacter : candidate.charAt( i - 1 );
+
+      if( !this.isCharacterAllowed(computedPreviousCharacter, currentCharacter) )  {
         return false;
       }
     }
@@ -41,12 +42,12 @@ export class NumbersSpacesDirective {
     return true;
   }
 
-  private handleEvent(candidate: string, event): boolean {
+  private handleEvent(candidate: string, previousCharacter: string, event): boolean {
     if( !this.shouldApply(event) ) { 
       return true;
     };
 
-    if( this.isAllowed(event, candidate) ) {
+    if( this.isAllowed(previousCharacter, candidate) ) {
       return true;
     }
     else {
@@ -74,12 +75,14 @@ export class NumbersSpacesDirective {
   @HostListener('window:keypress', ['$event'])
   keyEvent(event: KeyboardEvent) {
     const inputChar = event.key;
-    return this.handleEvent(inputChar, event);
+
+    let previousCharacter: string = this.lookupLastCharacter(event.srcElement);
+    return this.handleEvent(inputChar, previousCharacter, event);
   }
 
   @HostListener('paste', ['$event']) 
   pasteEvent(event) {
-    event.preventDefault();
-    return false;
+    const data = event.clipboardData.getData('Text');
+    return this.handleEvent(data, '', event);
   }
 }

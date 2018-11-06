@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ExitStepService } from '../services/exit-step/exit-step.service';
 import { ResultDataService } from '../services/result-service/result-data.service';
 import { SimpleResult} from '../models/simple-result.model';
+import { NumericHelperService } from '../services/numeric-helper/numeric-helper.service';
 
 
 @Component({
@@ -12,12 +13,17 @@ import { SimpleResult} from '../models/simple-result.model';
 export class DayFiveComponent implements OnInit {
   public jumpOffsets: string;
 
-  constructor(private _exitStepService: ExitStepService, private _resultDataService: ResultDataService  ) { }
+  constructor(private _exitStepService: ExitStepService, private _numericHelperService: NumericHelperService, private _resultDataService: ResultDataService ) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    this._exitStepService.calculate(this.jumpOffsets).subscribe((data: SimpleResult)  =>  this._resultDataService.updateResult(data.result.toString()));
+    if( this._numericHelperService.isValid(this.jumpOffsets) ) {
+      this._exitStepService.calculate(this.jumpOffsets).subscribe((data: SimpleResult)  =>  this._resultDataService.updateResult(data.result.toString()));
+    }
+    else {
+      this._resultDataService.updateResult("Invalid numeric input!");
+    }
   }
 }
