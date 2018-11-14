@@ -1,0 +1,14 @@
+<form class="day-six-form" #userForm="ngForm" (ngSubmit)="onSubmit()" name="daySixForm" novalidate>
+
+  <div layout="row">
+      <mat-form-field  class="md-icon-float md-block md-title">
+              <input app-number-spaces matInput placeholder="Memory Banks" name="Memory Banks" [(ngModel)]="memoryBanks" type="text">
+      </mat-form-field>
+  </div>  
+
+  <div class="form-button">
+      <button mat-button >Calculate</button>
+  </div>
+
+  <app-problem-description [problemNumber]=6></app-problem-description>
+</form>

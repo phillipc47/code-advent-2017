@@ -17,6 +17,7 @@ import { HttpInterceptorService } from './services/http-interceptor/http-interce
 import { DayFourComponent } from './day-four/day-four.component';
 import { NumbersSpacesDirective } from './directives/number-spaces/numbers-spaces.directive';
 import { DayFiveComponent } from './day-five/day-five.component';
+import { DaySixComponent } from './day-six/day-six.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { DayFiveComponent } from './day-five/day-five.component';
     NumbersSpacesDirective,
     ProblemDescriptionComponent,
     DayFiveComponent,
+    DaySixComponent,
   ],
   imports: [
     BrowserModule,
